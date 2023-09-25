@@ -22,7 +22,6 @@ function CourseSection() {
 function GitHubRepository() {
   return (
     <Link href="https://github.com/kelvinvu19/cprg306-assignments">
-      <a>GitHub Repository</a>
     </Link>
   );
 }
