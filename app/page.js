@@ -5,15 +5,8 @@ export default function StudentInfo() {
   return (
     <div>
       <YourName />
-      <CourseSection />
-      <GitHubRepository />
-    </div>
-  );
-}
 
-function YourName() {
-  return <h1>Kelvin Vu</h1>;
-}
+const HomePage = <h1>CPRG 306: Web Development 2 - Assignments</h1>
 
 function CourseSection() {
   return <h1>CPRG 306 B</h1>;
