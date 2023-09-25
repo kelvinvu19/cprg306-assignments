@@ -23,6 +23,7 @@ function GitHubRepository() {
   return (
     <div>    
       <Link href="https://github.com/kelvinvu19/cprg306-assignments">
+        <a>test</a>
     </Link>
     </div>
   );
