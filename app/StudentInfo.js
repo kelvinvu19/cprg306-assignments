@@ -4,8 +4,8 @@ import React from 'react';
 export default function StudentInfo() {
   return (
     <div>
-    <h1>CPRG 306 B</h1>
-    <p> Name: Kelvin Vu</p>
+    <p>Name: Kelvin Vu</p>
+    <p>CPRG 306 B</p>
     <p>    
     <Link href="https://github.com/kelvinvu19/cprg306-assignments"> https://github.com/kelvinvu19/cprg306-assignments </Link>
     </p>
