@@ -77,64 +77,64 @@ export default function ItemList() {
       return (
         <>
           <Item
-            name={event1.name}
-            quantity={event1.quantity}
-            category={event1.category}
+            name={item1.name}
+            quantity={item1.quantity}
+            category={item1.category}
           />
           <Item
-            name={event2.name}
-            quantity={event2.quantity}
-            category={event2.category}
+            name={item2.name}
+            quantity={item2.quantity}
+            category={item2.category}
           />
           <Item
-            name={event3.name}
-            quantity={event3.quantity}
-            category={event3.category}
+            name={item3.name}
+            quantity={item3.quantity}
+            category={item3.category}
           />
           <Item
-            name={event4.name}
-            quantity={event4.quantity}
-            category={event4.category}
+            name={item4.name}
+            quantity={item4.quantity}
+            category={item4.category}
           />
           <Item
-            name={event5.name}
-            quantity={event5.quantity}
-            category={event5.category}
-          />
-                    <Item
-            name={event6.name}
-            quantity={event6.quantity}
-            category={event6.category}
+            name={item5.name}
+            quantity={item5.quantity}
+            category={item5.category}
           />
           <Item
-            name={event7.name}
-            quantity={event7.quantity}
-            category={event7.category}
+            name={item6.name}
+            quantity={item6.quantity}
+            category={item6.category}
           />
           <Item
-            name={event8.name}
-            quantity={event8.quantity}
-            category={event8.category}
+            name={item7.name}
+            quantity={item7.quantity}
+            category={item7.category}
           />
           <Item
-            name={event9.name}
-            quantity={event9.quantity}
-            category={event9.category}
+            name={item8.name}
+            quantity={item8.quantity}
+            category={item8.category}
           />
           <Item
-            name={event10.name}
-            quantity={event10.quantity}
-            category={event10.category}
+            name={item9.name}
+            quantity={item9.quantity}
+            category={item9.category}
           />
-            <Item
-            name={event11.name}
-            quantity={event11.quantity}
-            category={event11.category}
+          <Item
+            name={item10.name}
+            quantity={item10.quantity}
+            category={item10.category}
           />
-            <Item
-            name={event12.name}
-            quantity={event12.quantity}
-            category={event12.category}
+          <Item
+            name={item11.name}
+            quantity={item11.quantity}
+            category={item11.category}
+          />
+          <Item
+            name={item12.name}
+            quantity={item12.quantity}
+            category={item12.category}
           />
         </>
       );
