@@ -17,6 +17,8 @@ export default function NewItem() {
     };
   console.log(NewItem);
 
+  alert(`Name: ${name}, Quantity: ${quantity}, Category: ${category}`);
+
 
     setName("");
     setQuantity(1);
@@ -81,7 +83,9 @@ export default function NewItem() {
                 <option value="other">Other</option>
                 </select>
             </label>
-        <button type="submit">Submit</button>
+        <button 
+        type="submit"
+        className="w-full py-2 px-4 bg-sky-600 hover:bg-sky-500 rounded-md text-white">Submit</button>
         </form>
     </main>
   );
