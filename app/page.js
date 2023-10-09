@@ -10,6 +10,7 @@ export default function Week2() {
           <StudentInfo />
           <Link href="/week2"> week2 </Link>
           <Link href="/week3"> week3 </Link>
+          <Link href="/week4"> week4 </Link>
       </div>
   );
 }
