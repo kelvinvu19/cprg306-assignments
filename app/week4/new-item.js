@@ -28,11 +28,11 @@ export default function NewItem() {
   };
 
   const handleQuantityChange = (item) => {
-    setDate(item.target.value);
+    setQuantity(item.target.value);
   };
 
   const handleCategoryChange = (item) => {
-    setLocation(item.target.value);
+    setCategory(item.target.value);
   };
 
   return (
