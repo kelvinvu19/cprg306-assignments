@@ -78,7 +78,6 @@ export default function NewItem() {
                 <option value="snacks">Snacks</option>
                 <option value="household">Household</option>
                 <option value="other">Other</option>
-                className="mt-1 p-1 block w-full rounded-md text-black bg-gray-100 focus:bg-white"
                 </select>
             </label>
         <button type="submit">Submit</button>
