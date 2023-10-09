@@ -66,6 +66,7 @@ export default function NewItem() {
                 <select
                 value={category}
                 onChange={handleCategoryChange} 
+                className="text-black"
             >
                 <option value="produce">Produce</option>
                 <option value="dairy">Dairy</option>
