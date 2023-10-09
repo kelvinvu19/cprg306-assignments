@@ -38,7 +38,7 @@ export default function NewItem() {
   return (
     <main>
         <form onSubmit={handleSubmit}>
-            <label>
+            <label className="block mb-4">
             Name:
             <input
                 required
