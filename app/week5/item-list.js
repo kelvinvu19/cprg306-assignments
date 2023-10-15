@@ -3,7 +3,7 @@ import Item from './item';
 import itemsData from './items.json';
 
 export default function ItemList() {
-  const [items, setItems] = useState(itemsData);
+  const [items] = useState(itemsData);
   const [sortBy, setSortBy] = useState("name"); 
 
 
