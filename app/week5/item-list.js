@@ -34,16 +34,6 @@ export default function ItemList() {
   return (
     <div>
       <div>
-        <label>Sort by:</label>
-        <select
-          value={sortBy}
-          onChange={(e) => handleSortChange(e.target.value)}
-        >
-          <option value="name">Name</option>
-          <option value="category">Category</option>
-        </select>
-      </div>
-      <div>
         <button
           onClick={() => handleSortChange("name")}
           style={nameButtonStyle}
