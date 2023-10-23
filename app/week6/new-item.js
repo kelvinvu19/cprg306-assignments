@@ -17,15 +17,19 @@ export default function NewItem({ onAddItem }) {
     setQuantity(1);
     setCategory('produce');
   };
+
   const handleNameChange = (event) => {
     setName(event.target.value);
   };
+
   const handleQuantityChange = (event) => {
     setQuantity(event.target.value);
   };
+
   const handleCategoryChange = (event) => {
     setCategory(event.target.value);
   };
+
   return (
     <main>
       <form onSubmit={handleSubmit}>
@@ -61,7 +65,7 @@ export default function NewItem({ onAddItem }) {
         </label>
         <button
           type="submit"
-          className="w-full py-2 px-4 bg-sky-600 hover:bg-sky-500 rounded-md text-white"
+          className="smaller-button" // Apply a CSS class for the smaller button
         >
           Submit
         </button>
