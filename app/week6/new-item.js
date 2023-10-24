@@ -13,11 +13,7 @@ export default function NewItem({ onAddItem }) {
       quantity,
       category,
     };
-
-    // Call the onAddItem prop and pass the item object
     onAddItem(item);
-
-    // Reset the form inputs
     setName('');
     setQuantity(1);
     setCategory('produce');
