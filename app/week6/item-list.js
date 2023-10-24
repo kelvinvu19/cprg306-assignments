@@ -12,6 +12,7 @@ export default function ItemList({ items }) {
   const handleCategoryChange = (newCategory) => {
     setFilterByCategory(newCategory);
   };
+
   const sortedItems = [...items].sort((a, b) => {
     if (sortBy === 'name') {
       return a.name.localeCompare(b.name);
