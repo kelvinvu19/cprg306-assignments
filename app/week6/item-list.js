@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from 'react';
 import Item from './item';
-import itemsData from './items.json';
 
 export default function ItemList() {
   const [items] = useState(itemsData);
