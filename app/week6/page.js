@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from 'react';
 import ItemList from "./item-list";
 import NewItem from "./new-item";
