@@ -61,12 +61,13 @@ export default function NewItem({ onAddItem }) {
             onChange={handleCategoryChange}
             className="text-black"
           >
+            <option value="produce">Produce</option>
+            <option value="dairy">Dairy</option>
+            <option value="meat">Meat</option>
+            {/* Add more categories as needed */}
           </select>
         </label>
-        <button
-          type="submit"
-          className="smaller-button" // Apply a CSS class for the smaller button
-        >
+        <button type="submit" className="small-button">
           Submit
         </button>
       </form>
