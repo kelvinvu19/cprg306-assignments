@@ -23,7 +23,7 @@ export default function ItemList({ items }) {
   });
 
   const filteredItems = filterByCategory === 'All'
-    ? sortedItems
+    ? [...sortedItems] 
     : sortedItems.filter(item => item.category === filterByCategory);
 
   const nameButtonStyle = {
