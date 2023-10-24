@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from 'react';
 import ItemList from "./item-list";
 import NewItem from "./new-item"; 
@@ -7,13 +8,8 @@ export default function Page() {
   const handleAddItem = (newItem) => {
     setItems([...items, newItem]);
   }
-
-  const pageStyle = {
-    backgroundColor: 'blue', 
-  };
-
   return (
-    <main style={pageStyle}>
+    <main>
       <h1 className="text-3xl font-semibold">
         Shopping List
       </h1>
