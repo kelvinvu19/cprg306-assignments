@@ -35,7 +35,7 @@ export default function ItemList({ items }) {
           Sort by Category
         </button>
       </div>
-      <ul style={{ background: 'white' }}> {/* Set background color to white */}
+      <ul>
         {sortedItems.map((item) => (
           <Item
             key={item.id}
