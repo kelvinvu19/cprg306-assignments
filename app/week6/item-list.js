@@ -8,7 +8,6 @@ export default function ItemList({ items }) {
     setSortBy(newSortBy);
   };
 
-  // Create a copy of items for sorting
   const sortedItems = [...items].sort((a, b) => {
     if (sortBy === 'name') {
       return a.name.localeCompare(b.name);
@@ -36,7 +35,7 @@ export default function ItemList({ items }) {
           Sort by Category
         </button>
       </div>
-      <ul>
+      <ul style={{ background: 'white' }}> {/* Set background color to white */}
         {sortedItems.map((item) => (
           <Item
             key={item.id}
