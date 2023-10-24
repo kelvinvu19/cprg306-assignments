@@ -84,8 +84,8 @@ export default function NewItem() {
                 </select>
             </label>
         <button 
-        type="submit"
-        className="w-full py-2 px-4 bg-sky-600 hover:bg-sky-500 rounded-md text-white">Submit</button>
+        type="submit" 
+        className="w-full py-2 px-4 bg-sky-600 hover:bg-sky-500 rounded-md text-white small-button">Submit</button>
         </form>
     </main>
   );
