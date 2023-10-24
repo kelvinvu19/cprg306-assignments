@@ -1,10 +1,8 @@
 "use client";
 import React, { useState } from 'react';
 import Item from './item';
-import itemsData from './items.json';
 
-export default function ItemList(items) {
-  const [items] = useState(itemsData);
+export default function ItemList({ items }) {
   const [sortBy, setSortBy] = useState("name");
   const [filterByCategory, setFilterByCategory] = useState("All");
 
