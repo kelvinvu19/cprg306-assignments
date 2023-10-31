@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 function MyComponent({ ingredient }) {
   const [meals, setMeals] = useState([]);
+
   function fetchMealIdeas(ingredient) {
     const apiUrl = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`;
 
@@ -14,7 +15,7 @@ function MyComponent({ ingredient }) {
         return response.json();
       })
       .then((data) => {
-        return data.meals || []; 
+        return data.meals || [];
       })
       .catch((error) => {
         console.error('Error fetching meal ideas:', error);
@@ -38,7 +39,10 @@ function MyComponent({ ingredient }) {
       <h2>Meal Ideas with {ingredient}</h2>
       <ul>
         {meals.map((meal) => (
-          <li key={meal.idMeal}>{meal.strMeal}</li>
+          <li key={meal.idMeal}>
+            <p>{meal.strMeal}</p>
+            <img src={meal.strMealThumb} alt={meal.strMeal} />
+          </li>
         ))}
       </ul>
     </div>
