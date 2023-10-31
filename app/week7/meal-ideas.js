@@ -10,7 +10,7 @@ function MyComponent({ ingredient }) {
     return fetch(apiUrl)
       .then((response) => {
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error('error');
         }
         return response.json();
       })
@@ -18,7 +18,7 @@ function MyComponent({ ingredient }) {
         return data.meals || [];
       })
       .catch((error) => {
-        console.error('Error fetching meal ideas:', error);
+        console.error('Error', error);
         return [];
       });
   }
@@ -31,7 +31,7 @@ function MyComponent({ ingredient }) {
   }
 
   useEffect(() => {
-    loadMealIdeas();
+    loadMealIdeas(); 
   }, [ingredient]);
 
   return (
@@ -41,7 +41,6 @@ function MyComponent({ ingredient }) {
         {meals.map((meal) => (
           <li key={meal.idMeal}>
             <p>{meal.strMeal}</p>
-            <img src={meal.strMealThumb} alt={meal.strMeal} />
           </li>
         ))}
       </ul>
@@ -50,3 +49,4 @@ function MyComponent({ ingredient }) {
 }
 
 export default MyComponent;
+
