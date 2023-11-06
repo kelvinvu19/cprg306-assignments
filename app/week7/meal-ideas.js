@@ -1,52 +1,42 @@
-"use client"
-import React, { useEffect, useState } from 'react';
+"use client";
 
-function MyComponent({ ingredient }) {
-  const [meals, setMeals] = useState([]);
+import { unstable_createNodejsStream } from "next/dist/compiled/@vercel/og";
+import { useState, useEffect } from "react";
 
-  function fetchMealIdeas(ingredient) {
-    const apiUrl = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`;
+export default function MealIdeas(){
+    const [meals, setMeals] = useState([]);
 
-    return fetch(apiUrl)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('error');
+    const fetchMealIdeas = async (ingredient) => {
+        try {
+            const url = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`;
+
+            const response = await fetch(url);
+            const data = await response.json();
+
+            const mealList = data.meals || [];
+
+            setMeals(mealList);
+        } catch (error) {
+            console.error('Error fetching meal ideas: ', error);
         }
-        return response.json();
-      })
-      .then((data) => {
-        return data.meals || [];
-      })
-      .catch((error) => {
-        console.error('Error', error);
-        return [];
-      });
-  }
+    };
 
-  function loadMealIdeas() {
-    fetchMealIdeas(ingredient)
-      .then((data) => {
-        setMeals(data);
-      });
-  }
+    const loadMealIdeas = () => {
+        fetchMealIdeas(ingredient);
+    }
 
-  useEffect(() => {
-    loadMealIdeas(); 
-  }, [ingredient]);
+    useEffect(() => {
+        loadMealIdeas();
+    }, [ingredient]);
 
-  return (
-    <div>
-      <h2>Meal Ideas with {ingredient}</h2>
-      <ul>
-        {meals.map((meal) => (
-          <li key={meal.idMeal}>
-            <p>{meal.strMeal}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+    return (
+        <div>
+          <h2>Meal Ideas for {ingredient}</h2>
+          <ul>
+            {meals.map((meal) => (
+              <li key={meal.idMeal}>{meal.strMeal}</li>
+            ))}
+          </ul>
+        </div>
+      );
 }
-
-export default MyComponent;
-

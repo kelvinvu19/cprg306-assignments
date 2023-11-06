@@ -1,87 +1,100 @@
-import React, { useState } from 'react';
+"use client";
 
-export default function NewItem({ onAddItem }) {
-  const [name, setName] = useState('');
-  const [quantity, setQuantity] = useState(1);
-  const [category, setCategory] = useState('produce');
+import { useState } from "react";
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+export default function NewEvent({ onAddItem }){
 
-    const item = {
-      name,
-      quantity,
-      category,
-    };
-    onAddItem(item);
-    setName('');
-    setQuantity(1);
-    setCategory('produce');
-  };
+    const [name, setName] = useState("");
+    const [quantity, setQuantity] = useState("");
+    const [category, setCategory] = useState("Produce");
 
-  const handleNameChange = (event) => {
-    setName(event.target.value);
-  };
+    const handleSubmit = (event) =>{
+        event.preventDefault();
+        const newItem = {
+            name,
+            quantity,
+            category,
+        }
 
-  const handleQuantityChange = (event) => {
-    setQuantity(event.target.value);
-  };
+        console.log(newItem);
 
-  const handleCategoryChange = (event) => {
-    setCategory(event.target.value);
-  };
+        onAddItem(newItem);
 
-  return (
-    <main>
-      <form onSubmit={handleSubmit}>
-        <label className="block mb-4">
-          Name:
-          <input
-            required
-            onChange={handleNameChange}
-            value={name}
-            className="mt-1 p-1 block w-full rounded-md text-black bg-gray-100 focus:bg-white"
-          />
-        </label>
-        <label>
-          Quantity:
-          <input
-            type="number"
-            min="1"
-            max="99"
-            required
-            onChange={handleQuantityChange}
-            value={quantity}
-            className="mt-1 p-1 block w-full rounded-md text-black bg-gray-100 focus:bg-white"
-          />
-        </label>
-        <label>
-          Category:
-          <select
-            value={category}
-            onChange={handleCategoryChange}
-            className="text-black"
-          >
-            <option value="produce">produce</option>
-            <option value="dairy">dairy</option>
-            <option value="bakery">bakery</option>
-            <option value="meat">meat</option>            
-            <option value="frozen foods">frozen foods</option>
-            <option value="canned goods">canned food</option>
-            <option value="dry goods">dry</option>
-            <option value="beverages">beverages</option>
-            <option value="snacks">snacks</option>
-            <option value="household">household</option>
-            <option value="other">other</option>
-          </select>
-        </label>
-        <button
-          type="submit"
-          className="w-full py-2 px-4 bg-sky-600 hover:bg-sky-500 rounded-md text-white"
-        >
-          Submit
-        </button>
-      </form>
-    </main>
-  );
+        setName("");
+        setQuantity("");
+        setCategory("Produce");
+    }
+
+    const handleNameChange = (event) => {
+        setName(event.target.value);
+    }
+    const handleQuantityChange = (event) => {
+        setQuantity(event.target.value);
+    }
+    const handleCategoryChange = (event) => {
+        setCategory(event.target.value);
+    }
+
+    return(
+        <main>
+            <div className="flex">
+                <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
+                    <h1 className="text-black text-2xl justify-center flex pb-2 ">Create New Item</h1>
+                    <form onSubmit={handleSubmit}>
+                        <label className="text-black block">
+                            <span>Item Name: </span>
+                            <input
+                            type="text"
+                            required
+                            onChange={handleNameChange}
+                            value={name}
+                            placeholder="Item Name"
+                            className="bg-slate-500 rounded border border-slate-900 p-"
+                            />
+                        </label><br />
+                        <label className="text-black block">
+                            <span>Quantity:</span>
+                            <input
+                            type="number"
+                            min="1"
+                            max="99"
+                            value={quantity}
+                            onChange={handleQuantityChange}
+                            required
+                            className="border border-slate-900 rounded"
+                            />
+                        </label><br />
+                        <label className="text-black block">
+                            <span>Category:</span>
+                            <select
+                            value={category}
+                            onChange={handleCategoryChange}
+                            className="border border-slate-900 rounded"
+                            >
+                                <option value="" disabled>category</option>
+                                <option value="Produce">Produce</option>
+                                <option value="Dairy">Dairy</option>
+                                <option value="Bakery">Bakery</option>
+                                <option value="Meat">Meat</option>
+                                <option value="Frozen Foods">Frozen Foods</option>
+                                <option value="Canned Goods">Canned Goods</option>
+                                <option value="Dry Goods">Dry Goods</option>
+                                <option value="Beverages">Beverages</option>
+                                <option value="Snacks">Snacks</option>
+                                <option value="Household">Household</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </label><br />
+                        <button
+                        type="submit"
+                        className="text-black mt-2 border bg-slate-400 border-slate-900 rounded"
+                        >
+                            Create Event
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    )
+
 }
