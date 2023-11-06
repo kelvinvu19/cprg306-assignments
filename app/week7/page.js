@@ -1,13 +1,10 @@
-"use client";
-
+import React, { useState } from "react";
 import ItemList from "./item-list";
 import NewItem from "./new-item";
 import itemData from "./items.json";
 import MealIdeas from "./meal-ideas";
 
-import { useState } from "react";
-
-export default function main() {
+export default function Main() {
   const [items, setItems] = useState(itemData);
   const [selectedItemName, setSelectedItemName] = useState("");
 
