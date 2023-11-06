@@ -1,36 +1,37 @@
 "use client";
 
-import ItemList from "./item-list"
-import NewEvent from "./new-item"
-import { useState } from "react";
+import ItemList from "./item-list";
+import NewItem from "./new-item";
+import itemData from "./items.json";
 import MealIdeas from "./meal-ideas";
 
-export default function Home() {
-    const [items, setItems] = useState(itemsData);
-    const [selectedItemName, setSelectedItemName] = useState('');
+import { useState } from "react";
 
-    function handleAddItem(item) {
-        setItems([...items, item]);
-    }
+export default function main() {
+  const [items, setItems] = useState(itemData);
+  const [selectedItemName, setSelectedItemName] = useState("");
 
-    const handleItemSelect = (selectedItems) => {
-        const cleanedItemName = selectedItem.name
-        .split(',')[0]
-        .replace(/([\u2700-\u27BF]|[\uE000-\uF8FF]|�[�-�]|�[�-�]|[\u2011-\u26FF]|�[�-�])/g, '')
-        .trim();
+  function handleAddItem(item) {
+    setItems([...items, item]);
+  }
 
-        setSelectedItemName(cleanedItemName);
-    }
-    
-    return (
-        <div className="flex">
-          <div>
-            <NewItem onAddItem={handleAddItem} />
-            <ItemList items={items} onItemSelect={handleItemSelect} /> {/* Pass onItemSelect prop */}
-          </div>
-          <div>
-            <MealIdeas ingredient={selectedItemName} /> {/* Pass selectedItemName as ingredient prop */}
-          </div>
+  const handleItemSelect = (item) => {
+    const cleanedName = item.split(',')[0].trim().replace(/[^\w\s]/gi, "");
+    setSelectedItemName(cleanedName);
+  }
+
+  return (
+    <main className="bg-slate-950">
+      <h1 className="text-3xl font-bold m-2">Shopping List</h1>
+      <div className="flex">
+        <div>
+          <NewItem onAddItem={handleAddItem} />
+          <ItemList items={items} onItemSelect={handleItemSelect} />
         </div>
-      );
+        <div>
+          <MealIdeas ingredient={selectedItemName} />
+        </div>
+      </div>
+    </main>
+  );
 }

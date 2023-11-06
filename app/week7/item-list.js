@@ -3,56 +3,39 @@
 import Item from "./item";
 import { useState } from "react";
 
-export default function ItemList({items, onSelect}) { 
-    const [sortBy, setSortBy] = useState("name");
+export default function ItemList({ items, onItemSelect }) {
+  const [sortBy, setSortBy] = useState("name");
 
-    const sortedList = [...items]
+  const sortedItems = items.slice().sort((a, b) => {
+    if (sortBy === "name") {
+      return a.name.localeCompare(b.name);
+    } else {
+      return a.category.localeCompare(b.category);
+    }
+  });
 
-    function sortByName() {
-        setSortBy("name");
-    }
-    function sortByCategory() {
-        setSortBy("category")
-    }
-
-    if(sortBy === "name"){
-        sortedList.sort((a, b) => a.name.localeCompare(b.name));
-    }
-    else if(sortBy === "category"){
-        sortedList.sort((a, b) => a.category.localeCompare(b.category));
-    }
-
-      return (
-        <main>
-          <div>
-            <button
-              className={`border border-whi   te p-2 m-2 ${
-                sortBy === "name" ? "bg-white text-black" : "bg-black"
-              }`}
-              onClick={sortByName}
-            >
-              Sort By Name
-            </button>
-            <button
-              className={`border border-white p-2 m-2 ${
-                sortBy === "category" ? "bg-white text-black" : "bg-black"
-              }`}
-              onClick={sortByCategory}
-            >
-              Sort By Category
-            </button>
-          </div>
-          <div>
-            {sortedList.map((item) => (
-              <Item
-                key={item.id}
-                name={item.name}
-                category={item.category}
-                quantity={item.quantity}
-                onSelect={() => onItemSelect(item)}
-              />
-            ))}
-          </div>
-        </main>
-      );
+  return (
+    <>
+      <label>Sort By: </label>
+      <button
+        className={`p-1 m-2 w-28 ${
+          sortBy === "name" ? "bg-green-500" : "bg-green-800"
+        }`}
+        onClick={() => setSortBy("name")}
+      >
+        Name
+      </button>
+      <button
+        className={`p-1 m-2 w-28 ${
+          sortBy === "category" ? "bg-green-500" : "bg-green-800"
+        }`}
+        onClick={() => setSortBy("category")}
+      >
+        Category
+      </button>
+      {sortedItems.map((i) => (
+        <Item key={i.id} name={i.name} quantity={i.quantity} category={i.category} onSelect={onItemSelect}/>
+      ))}
+    </>
+  );
 }
