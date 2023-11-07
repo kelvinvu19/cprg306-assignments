@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import ItemList from "./item-list";
 import NewItem from "./new-item";
-import itemsData from './items.json';
 import MealIdeas from './MealIdeas';
 
 export default function Main() {
