@@ -6,6 +6,7 @@ export default function MealIdeas({ ingredient }) {
   const [mealID, setMealID] = useState(null);
   const [details, setDetails] = useState([]);
 
+<<<<<<< HEAD
   async function fetchMealIdeas() {
     try {
       const response = await fetch(
@@ -22,6 +23,36 @@ export default function MealIdeas({ ingredient }) {
     if (ingredient) {
       fetchMealIdeas();
     }
+=======
+  function fetchMealIdeas(ingredient) {
+    const apiUrl = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`;
+
+    return fetch(apiUrl)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        return data.meals || [];
+      })
+      .catch((error) => {
+        console.error('Error fetching meal ideas:', error);
+        return [];
+      });
+  }
+
+  function loadMealIdeas() {
+    fetchMealIdeas(ingredient)
+      .then((data) => {
+        setMeals(data);
+      });
+  }
+
+  useEffect(() => {
+    loadMealIdeas();
+>>>>>>> parent of d416f40 (Update meal-ideas.js)
   }, [ingredient]);
 
   async function fetchMealDetails() {
@@ -54,6 +85,7 @@ export default function MealIdeas({ ingredient }) {
 
   return (
     <div>
+<<<<<<< HEAD
       <h2>Meal Ideas</h2>
 
       {ingredient ? (
@@ -86,3 +118,19 @@ export default function MealIdeas({ ingredient }) {
     </div>
   );
 }
+=======
+      <h2>Meal Ideas with {ingredient}</h2>
+      <ul>
+        {meals.map((meal) => (
+          <li key={meal.idMeal}>
+            <p>{meal.strMeal}</p>
+            <img src={meal.strMealThumb} alt={meal.strMeal} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default MyComponent;
+>>>>>>> parent of d416f40 (Update meal-ideas.js)
