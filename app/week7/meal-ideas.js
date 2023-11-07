@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 
 export default function MealIdeas({ ingredient }) {
   const [meals, setMeals] = useState([]);
+<<<<<<< HEAD
   const [mealID, setMealID] = useState(null);
   const [details, setDetails] = useState([]);
 
@@ -24,6 +25,8 @@ export default function MealIdeas({ ingredient }) {
       fetchMealIdeas();
     }
 =======
+=======
+>>>>>>> parent of 7672992 (Update meal-ideas.js)
   function fetchMealIdeas(ingredient) {
     const apiUrl = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`;
 
@@ -35,7 +38,7 @@ export default function MealIdeas({ ingredient }) {
         return response.json();
       })
       .then((data) => {
-        return data.meals || [];
+        return data.meals || []; 
       })
       .catch((error) => {
         console.error('Error fetching meal ideas:', error);
@@ -122,10 +125,7 @@ export default function MealIdeas({ ingredient }) {
       <h2>Meal Ideas with {ingredient}</h2>
       <ul>
         {meals.map((meal) => (
-          <li key={meal.idMeal}>
-            <p>{meal.strMeal}</p>
-            <img src={meal.strMealThumb} alt={meal.strMeal} />
-          </li>
+          <li key={meal.idMeal}>{meal.strMeal}</li>
         ))}
       </ul>
     </div>
