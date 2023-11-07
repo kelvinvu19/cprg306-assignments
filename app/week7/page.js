@@ -1,4 +1,3 @@
-"use client";
 import Link from 'next/link';
 import { useState } from 'react'; // Don't forget to import useState
 import ItemList from './item-list';
