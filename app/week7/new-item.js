@@ -1,85 +1,84 @@
 "use client";
-
 import { useState } from "react";
 
-export default function NewItem( {onAddItem} ) {
-  const [name, setName] = useState("");
-  const [quantity, setQuantity] = useState(1);
-  const [category, setCategory] = useState("produce");
+export default function NewItem({ onAddItem }) {
+    const [name, setName] = useState("");
+    const [quantity, setQuantity] = useState(1);
+    const [category, setCategory] = useState("produce");
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const item = {
-      id: Math.random().toString(36).substr(2, 9),
-      name: name,
-      quantity: quantity,
-      category: category,
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const newItem = { name, quantity, category };
+        onAddItem(newItem);
+        setName("");
+        setQuantity(1);
+        setCategory("produce");
     };
-    console.log(item);
-    //alert(`Name: ${name}\nQuantity: ${quantity}\nCategory: ${category}`);
-    onAddItem(item);
-    setName("");
-    setQuantity(1);
-    setCategory("produce");
-  };
 
-  return (
-    <div className="flex justify-center">
-      <form onSubmit={handleSubmit} className="p-4 m-9 bg-slate-900 text-black">
-        <div className="flex flex-col">
-          <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Item name"
-            value={name}
-            onChange={(event) => setName(event.target.value)}
-            required
-            className="m-2 border-2 p-2 rounded-lg font-sans"
-          />
+    const handleNameChange = (event) => {
+        setName(event.target.value);
+    }
 
-          <input
-            type="number"
-            id="quantity"
-            name="quantity"
-            min="1"
-            max="99"
-            value={quantity}
-            onChange={(event) => setQuantity(event.target.value)}
-            required
-            className="m-2 border-2 p-2 rounded-lg font-sans"
-          />
+    const handleQuantityChange = (event) => {
+        setQuantity(event.target.value);
+    }
 
-          <select
-            id="category"
-            name="category"
-            value={category}
-            onChange={(event) => setCategory(event.target.value)}
-            required
-            className="m-2 border-2 p-2 rounded-lg font-sans"
-          >
-            <option value="">Select a category</option>
-            <option value="produce">Produce</option>
-            <option value="dairy">Dairy</option>
-            <option value="bakery">Bakery</option>
-            <option value="meat">Meat</option>
-            <option value="frozen foods">Frozen Foods</option>
-            <option value="canned goods">Canned Goods</option>
-            <option value="dry goods">Dry Goods</option>
-            <option value="beverages">Beverages</option>
-            <option value="snacks">Snacks</option>
-            <option value="household">Household</option>
-            <option value="other">Other</option>
-          </select>
+    const handleCategoryChange = (event) => { 
+        setCategory(event.target.value);
+    }
+    
+    return (
+        <div className="w-full max-w-md bg-gray-800 p-8 rounded-lg shadow-md">
+            <form onSubmit={handleSubmit}>
+                <label className="block mb- 4">
+                    <span className="text-gray-800">Name:</span>
+                    <input
+                    type="text"
+                    value={name}
+                    onChange={handleNameChange}
+                    required
+                    className="mt-1 p-1 block w-full rounded-md text-black bg-gray-100 focus:bg-white"
+                    />
+                </label>
+                
+                <label className="block mb-4">
+                    <span className="text-gray-800">Quantity:</span>
+                    <input
+                    type="number"
+                    min="1"
+                    max="99"
+                    value={quantity}
+                    onChange={handleQuantityChange}
+                    required
+                    className="mt-1 p-1 block w-full rounded-md text-black bg-gray-100 focus:bg-white"
+                    />
+                </label>
 
-          <button
-            type="submit"
-            className="mt-4 py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-700"
-          >
-            Submit
-          </button>
+                <label className="block mb-4">
+                    <span className="text-gray-800">Category:</span>
+                    <select
+                    value={category}
+                    onChange={handleCategoryChange}
+                    required
+                    className="mt-1 p-1 block w-full rounded-md text-black bg-gray-100 focus:bg-white"
+                    >
+                        <option value="produce">Produce</option>
+                        <option value="dairy">Dairy</option>
+                        <option value="meat">Meat</option>
+                        <option value="canned goods">Canned Goods</option>
+                        <option value="dry goods">Dry Goods</option>
+                        <option value="household">Household</option>
+                    </select>
+                </label>
+
+                <button
+                    class="btn btn-primary"
+                    type="submit"
+                    //className="w-full py-2 px-4 bg-sky-600 hover:bg-sky-500 rounded-md text-white"
+                >
+                    Add Item
+                </button>
+            </form>
         </div>
-      </form>
-    </div>
-  );
-}
+    );
+};

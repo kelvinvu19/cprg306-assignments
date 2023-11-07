@@ -1,136 +1,138 @@
-"use client";
 import { useState, useEffect } from "react";
 
-export default function MealIdeas({ ingredient }) {
-  const [meals, setMeals] = useState([]);
-<<<<<<< HEAD
-  const [mealID, setMealID] = useState(null);
-  const [details, setDetails] = useState([]);
-
-<<<<<<< HEAD
-  async function fetchMealIdeas() {
-    try {
-      const response = await fetch(
-        `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`
-      );
-      const data = await response.json();
-      setMeals(data.meals);
-    } catch (error) {
-      console.log(error.message);
-    }
+const fetchMealIdeas = async (ingredient) => {
+  try {
+    const response = await fetch(
+      `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`
+    );
+    const data = await response.json();
+    return data.meals;
+  } catch (error) {
+    console.error("Error fetching meal ideas:", error);
+    return [];
   }
+};
 
-  useEffect(() => {
-    if (ingredient) {
-      fetchMealIdeas();
-    }
-=======
-=======
->>>>>>> parent of 7672992 (Update meal-ideas.js)
-  function fetchMealIdeas(ingredient) {
-    const apiUrl = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`;
-
-    return fetch(apiUrl)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then((data) => {
-        return data.meals || []; 
-      })
-      .catch((error) => {
-        console.error('Error fetching meal ideas:', error);
-        return [];
-      });
-  }
-
-  function loadMealIdeas() {
-    fetchMealIdeas(ingredient)
-      .then((data) => {
-        setMeals(data);
-      });
-  }
-
-  useEffect(() => {
-    loadMealIdeas();
->>>>>>> parent of d416f40 (Update meal-ideas.js)
-  }, [ingredient]);
-
-  async function fetchMealDetails() {
-    try {
-      const response = await fetch(
-        `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealID}`
-      );
-      const data = await response.json();
-      let i = 0;
-      let newDetails = [];
-      while (i < 30) {
-        i++;
-        if (data.meals[0][`strIngredient${i}`] === "") {
-          i = 30;
-        } else {
-          newDetails = [...newDetails, data.meals[0][`strIngredient${i}`]];
-        }
+const fetchIngredients = async (mealID) => {
+  try {
+    const response = await fetch(
+      `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealID}`
+    );
+    const data = await response.json();
+    const ingredientsList = [];
+    for (let i = 1; i <= 20; i++) {
+      const ingredient = data.meals[0][`strIngredient${i}`];
+      const measure = data.meals[0][`strMeasure${i}`];
+      if (ingredient && measure) {
+        ingredientsList.push({ ingredient, measure });
       }
-      setDetails(newDetails);
-    } catch (error) {
-      console.log(error.message);
     }
+    return ingredientsList;
+  } catch (error) {
+    console.error("Error fetching ingredients:", error);
+    return [];
   }
+};
+
+export default function MealIdeas({ ingredient, updateNumberOfMeals }) {
+  const [meals, setMeals] = useState([]);
+  const [ingredients, setIngredients] = useState([]);
+  const [fetchedMeal, setFetchedMeal] = useState([]);
 
   useEffect(() => {
-    if (mealID) {
-      fetchMealDetails();
+    const fetchMealIdeasData = async () => {
+      if (!ingredient) {
+        setMeals([]);
+        updateNumberOfMeals(0);
+        setFetchedMeal([]);
+        return;
+      }
+      try {
+        const mealIdeas = await fetchMealIdeas(ingredient);
+
+        if (!mealIdeas || mealIdeas.length === 0) {
+          setMeals([]);
+          updateNumberOfMeals(0);
+          setFetchedMeal([]);
+          return;
+        }
+
+        setMeals(mealIdeas);
+        updateNumberOfMeals(mealIdeas.length);
+      } catch (error) {
+        console.error("Error fetching meal ideas:", error);
+        setMeals([]);
+        setFetchedMeal([]);
+        updateNumberOfMeals(0);
+      }
+    };
+
+    fetchMealIdeasData();
+  }, [ingredient, updateNumberOfMeals]);
+
+  const fetchIngredientsData = async (mealID) => {
+    if (fetchedMeal.includes(mealID)) {
+      return;
     }
-  }, [mealID]);
+
+    try {
+      const ingredientsList = await fetchIngredients(mealID);
+      setIngredients((prevIngredients) => [...prevIngredients, ...ingredientsList]);
+      setFetchedMeal([mealID]);
+    } catch (error) {
+      console.error("Error fetching meal ideas:", error);
+      setIngredients([]);
+    }
+  };
 
   return (
-    <div>
-<<<<<<< HEAD
-      <h2>Meal Ideas</h2>
-
-      {ingredient ? (
-        <p>Meal ideas for {ingredient}:</p>
-      ) : (
-        <p>No ingredient selected</p>
-      )}
-
-      {meals ? (
-        <ul>
-          {meals.map((meal) => (
-            <li
-              className="p-2 m-4 bg-slate-900 max-w-sm hover:bg-cyan-600"
-              onClick={() => setMealID(meal.idMeal)}
-              key={meal.idMeal}
-            >
-              {meal.strMeal}
-              {details && mealID === meal.idMeal && (
+    <div className="card bg-base-200 shadow-xl max-w-lg mx-2 mb-2">
+      <div className="card-body">
+        <p className="card-title text-2xl">Meal Ideas</p>
+        {ingredient ? (
+          <>
+            {meals.length > 0 ? (
+              <>
+                <p>
+                  Here are some meal ideas using{" "}
+                  <span className="font-bold text-primary">{ingredient}</span>:
+                </p>
                 <ul>
-                  <p>Ingredients:</p>
-                  <p>{details.join(", ")}</p>
+                  {meals.map((meal) => (
+                    <div
+                      key={meal.idMeal}
+                      className="collapse collapse-arrow bg-base-100 hover:btn-active mb-2"
+                      onClick={() => fetchIngredientsData(meal.idMeal)}
+                    >
+                      <input type="radio" name="my-accordion" />
+                      <div className="collapse-title text-xl font-medium">
+                        {meal.strMeal}
+                      </div>
+                      <div className="collapse-content">
+                        <p className="font-bold mb-2">Ingredients needed:</p>
+                        <ul>
+                          {ingredients.map((ingredient, index) => (
+                            <li key={index}>
+                              {ingredient.ingredient} {ingredient.measure}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  ))}
                 </ul>
-              )}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No meal ideas found for {ingredient}</p>
-      )}
+              </>
+            ) : (
+              <p>
+                No meals found using{" "}
+                <span className="font-bold text-primary">{ingredient}</span>.
+              </p>
+            )}
+          </>
+        ) : (
+          <p>Select an item to see meal ideas</p>
+        )}
+      </div>
     </div>
   );
 }
-=======
-      <h2>Meal Ideas with {ingredient}</h2>
-      <ul>
-        {meals.map((meal) => (
-          <li key={meal.idMeal}>{meal.strMeal}</li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-export default MyComponent;
->>>>>>> parent of d416f40 (Update meal-ideas.js)

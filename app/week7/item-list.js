@@ -1,41 +1,54 @@
 "use client";
-
-import Item from "./item";
 import { useState } from "react";
+import Item from "./item";
 
 export default function ItemList({ items, onItemSelect }) {
   const [sortBy, setSortBy] = useState("name");
 
-  const sortedItems = items.slice().sort((a, b) => {
+  const sortedItems = [...items].sort((a, b) => {
     if (sortBy === "name") {
       return a.name.localeCompare(b.name);
-    } else {
+    } else if (sortBy === "category") {
       return a.category.localeCompare(b.category);
     }
   });
 
+  const handleSortByName = () => {
+    setSortBy("name");
+  };
+
+  const handleSortByCategory = () => {
+    setSortBy("category");
+  };
+
   return (
-    <>
-      <label>Sort By: </label>
-      <button
-        className={`p-1 m-2 w-28 ${
-          sortBy === "name" ? "bg-green-500" : "bg-green-800"
-        }`}
-        onClick={() => setSortBy("name")}
-      >
-        Name
-      </button>
-      <button
-        className={`p-1 m-2 w-28 ${
-          sortBy === "category" ? "bg-green-500" : "bg-green-800"
-        }`}
-        onClick={() => setSortBy("category")}
-      >
-        Category
-      </button>
-      {sortedItems.map((i) => (
-        <Item key={i.id} name={i.name} quantity={i.quantity} category={i.category} onSelect={onItemSelect}/>
-      ))}
-    </>
+    <div>
+      <div>
+        <button
+          onClick={handleSortByName}
+          className="btn btn-primary"
+        >
+          Sort by Name
+        </button>
+        <button
+          onClick={handleSortByCategory}
+          className="btn btn-primary"
+        >
+          Sort by Category
+        </button>
+      </div>
+      <ul>
+        {sortedItems.map((item) => (
+          <Item
+            key={item.id}
+            {...item}
+            onSelect={() => onItemSelect(item)}
+          />
+        ))}
+      </ul>
+    </div>
   );
 }
+
+
+
