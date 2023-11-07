@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import ItemList from "./item-list";
 import NewItem from "./new-item";
-import itemData from "./items.json";
-import MealIdeas from "./meal-ideas";
+import itemsData from './items.json';
+import MealIdeas from './meal-ideas';
 
 export default function Main() {
   const [items, setItems] = useState(itemData);
