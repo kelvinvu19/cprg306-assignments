@@ -10,6 +10,5 @@ export default function StudentInfo() {
     <Link href="https://github.com/kelvinvu19/cprg306-assignments"> https://github.com/kelvinvu19/cprg306-assignments </Link>
     </p>
     </div>
-    
     );
 }
